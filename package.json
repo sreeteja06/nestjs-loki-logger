@@ -2,7 +2,7 @@
   "name": "nestjs-loki-logger",
   "version": "0.0.1",
   "description": "",
-  "author": "sreeteja",
+  "author": "sreeteja06",
   "license": "ISC",
   "main": "dist/index.js",
   "scripts": {

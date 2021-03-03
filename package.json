@@ -62,8 +62,7 @@
     "nestjs",
     "loki",
     "logger",
-    "grafana",
-    "loki"
+    "grafana"
   ],
   "bugs": {
     "url": "https://github.com/sreeteja06/nestjs-loki-logger/issues"

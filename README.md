@@ -38,6 +38,8 @@ export class AppController {
 
   @Get()
   getHello(): string {
+  
+    this.lokiLogger.debug('this is how we rock');
     this.lokiLogger.debug('this is how we rock', undefined, {
       label: 'testing', // you can set specifc labels to the log
     });

@@ -16,6 +16,7 @@ import { LokiLoggerModule } from 'nestjs-loki-logger';
         'label': 'testing',     // app level labels, these labels will be attached to every log in the application
       },
       logToConsole: false,
+      gzip: false // contentEncoding support gzip or not
     }),
   ],
 })

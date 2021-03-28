@@ -11,6 +11,7 @@ export class LokiLogger extends Logger {
   static lokiUrl = 'localhost:3100';
   static defaultLabels: any = {};
   static logToConsole = false;
+  static gzip = false;
 
   private static sendLokiRequest = (
     labels: Record<string, string>,
@@ -28,10 +29,14 @@ export class LokiLogger extends Logger {
     axios({
       method: 'POST',
       url: `${LokiLogger.lokiUrl}/loki/api/v1/push`,
-      headers: {
-        'Content-Type': 'application/json',
-        'Content-Encoding': 'application/gzip',
-      },
+      headers: LokiLogger.gzip
+        ? {
+            'Content-Type': 'application/json',
+            'Content-Encoding': 'application/gzip',
+          }
+        : {
+            'Content-Type': 'application/json',
+          },
       data: data,
     })
       .then()
@@ -42,6 +47,7 @@ export class LokiLogger extends Logger {
     this.lokiUrl = options.lokiUrl;
     this.defaultLabels = options.labels ?? {};
     this.logToConsole = options.logToConsole ?? false;
+    this.gzip = !!options.gzip;
     return LokiLogger;
   }
 

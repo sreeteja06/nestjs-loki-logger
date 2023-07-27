@@ -12,6 +12,7 @@ export class LokiLogger extends Logger {
   static defaultLabels: any = {};
   static logToConsole = false;
   static gzip = false;
+  static onLokiError: (error: any) => void = () => {};
 
   private static sendLokiRequest = (
     labels: Record<string, string>,
@@ -40,7 +41,13 @@ export class LokiLogger extends Logger {
       data: data,
     })
       .then()
-      .catch(error => console.log('error', error?.response?.data));
+      .catch((error) => {
+        if (LokiLogger.onLokiError) {
+          LokiLogger.onLokiError(error);
+        } else {
+          console.error('error', error.message, error?.response?.data);
+        }
+      });
   };
 
   static forRoot(options: NestLokiModuleOptions): any {
